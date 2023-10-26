@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      img {
+        height: 200px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        margin: 20px;
+      }
+    </style>
+    <title>My Pet Page</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Welcome To Random Cat Pictures</h1>
+      <img
+        id="photo"
+        src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fHww"
+        alt="Cat"
+      />
+      <button id="btn">Get Random Cat!</button>
+    </main>
+  </body>
+
+  <script>
+    const button = document.getElementById("btn");
+    console.log({ button });
+    button.addEventListener("click", (e) => {
+      console.log({ e, note: "getting here" });
+      fetch(" https://api.thecatapi.com/v1/images/search")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log({ data });
+          document.getElementById("photo").src = data[0].url;
+        });
+    });
+  </script>
+</html>
